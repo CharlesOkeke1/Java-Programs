@@ -110,40 +110,6 @@ public class Spin
 		return new SpinResult(rights, lefts, angle);	 
 	}
 
-	/* Function to turn cardinal numbers into their ordinal counterparts */
-	public static String Ordinalize(int number) {
-		if ((number % 100 >= 11) && (number % 100 <= 13)) return number + "th";
-
-		switch (number % 10) {
-			case 1: return number + "st";
-			case 2: return number + "nd";
-			case 3: return number + "rd";
-			default: return number + "th";
-		}	
-	}
-
-	public static void SteppedPrinting(String str, int time) {
-		String[] list = str.split("");
-		int lastIdx = list.length - 1;
-
-		/*Display the message with a delay using thread.sleep() */
-		for (int i = 0; i < list.length; i++) {
-			if (list[i] == list[lastIdx]) {
-				System.out.println(list[i]);
-			} else {
-				System.out.print(list[i]);
-				try {
-					// Pause for specified time
-					Thread.sleep(time); 
-				} catch (InterruptedException e) {
-					// Handle the interruption if needed
-					Thread.currentThread().interrupt();
-					System.err.println("Thread was interrupted.");
-				}
-			}
-		}
-	}
-
 	/*Function to initialize the game and retrive necessary information from the user*/	
 	public static void initializer(List<String> directions) {
 		Scanner sc = new Scanner(System.in);
@@ -164,7 +130,7 @@ public class Spin
 		if (choice.equals("n")) {
 			/*Collect the users inputed turns and add them to the list */
 			while (count < choiceNumber) {
-				System.out.print("Enter the " + Ordinalize(count + 1) + " direction: ");
+				System.out.print("Enter the " + MyUtils.Ordinalize(count + 1) + " direction: ");
 				String input = sc.nextLine();
 				directions.add(input);
 				count++;
@@ -214,7 +180,7 @@ public class Spin
 		String wlcmMssg = "===== WELCOME TO THE SPIN GAME =====";
 		String report = "===== THE SPIN GAME PRESENTS YOUR SPIN REPORT =====";
 
-		SteppedPrinting(wlcmMssg, 200); //Run the welcome function
+		MyUtils.SteppedPrinting(wlcmMssg, 200); //Run the welcome function
 		
 		/*If the user is happy with their turns, then the solve function is called and results displayed
 		else the initialization process starts again */
@@ -230,7 +196,7 @@ public class Spin
 		SpinResult result = solve(directions);
 
 		/*Display the results banner with a special delayed display method and then display the results*/
-		SteppedPrinting(report, 200);
+		MyUtils.SteppedPrinting(report, 200);
 
 		System.out.println("Total Turns:" + (result.rights + result.lefts));
 		System.out.println("Left Turns: " + result.lefts); 
