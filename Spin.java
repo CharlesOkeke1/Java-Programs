@@ -98,25 +98,8 @@ public class Spin
 		}
 
 		/*Display the results banner with a special delayed display method and then display the results*/
-		String report = "===== THE SPIN GAME PRESENTS YOUR TURN REPORT =====";
-		String[] rpt = report.split("");
-		int lastIdx = rpt.length - 1;
-
-		for (int i = 0; i < rpt.length; i++) {
-			if (rpt[i] == rpt[lastIdx]) {
-				System.out.println(rpt[i]);
-			} else {
-				System.out.print(rpt[i]);
-				try {
-					// Pause for 200 milliseconds
-					Thread.sleep(200); 
-				} catch (InterruptedException e) {
-					// Handle the interruption if needed
-					Thread.currentThread().interrupt();
-					System.err.println("Thread was interrupted.");
-				}
-			}
-		}
+		String report = "===== THE SPIN GAME PRESENTS YOUR SPIN REPORT =====";
+		SteppedPrinting(report, 200);
 
 		System.out.println("The total number of turns was " + (rights + lefts) + " turns with " 
 		+ lefts + " left turns and " + rights + " right turns."); 
@@ -134,22 +117,19 @@ public class Spin
 		}	
 	}
 
-	/*Display the welcome message.*/
-	public static void welcome() {
-		/*Uses the same technique as the result display section of the solve method */
-		String wlcm = "===== WELCOME TO THE SPIN GAME =====";
-		String[] welcome = wlcm.split("");
-		int lastIdx = welcome.length - 1;
+	public static void SteppedPrinting(String str, int time) {
+		String[] list = str.split("");
+		int lastIdx = list.length - 1;
 
-		/*Display the welcome message with a delay using thread.sleep() */
-		for (int i = 0; i < welcome.length; i++) {
-			if (welcome[i] == welcome[lastIdx]) {
-				System.out.println(welcome[i]);
+		/*Display the message with a delay using thread.sleep() */
+		for (int i = 0; i < list.length; i++) {
+			if (list[i] == list[lastIdx]) {
+				System.out.println(list[i]);
 			} else {
-				System.out.print(welcome[i]);
+				System.out.print(list[i]);
 				try {
-					// Pause for 200 milliseconds
-					Thread.sleep(200); 
+					// Pause for specified time
+					Thread.sleep(time); 
 				} catch (InterruptedException e) {
 					// Handle the interruption if needed
 					Thread.currentThread().interrupt();
@@ -157,6 +137,7 @@ public class Spin
 				}
 			}
 		}
+
 	}
 
 	/*Function to initialize the game and retrive necessary information from the user*/	
@@ -229,7 +210,9 @@ public class Spin
 		Scanner sc = new Scanner(System.in);
 		boolean confirmed = false;
 
-		welcome(); //Run the welcome function
+		String wlcmMssg = "===== WELCOME TO THE SPIN GAME =====";
+
+		SteppedPrinting(wlcmMssg, 200); //Run the welcome function
 		
 		/*If the user is happy with their array, then the solve function is called and results displayed
 		else the initialization process starts again */
@@ -249,4 +232,3 @@ public class Spin
 
 
 }
-
