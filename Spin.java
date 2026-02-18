@@ -98,19 +98,18 @@ public class Spin
 		}
 
 		/*Display the results banner with a special delayed display method and then display the results*/
-		String report = "===== SPIN PRESENTS YOUR TURN REPORT =====";
+		String report = "===== THE SPIN GAME PRESENTS YOUR TURN REPORT =====";
 		String[] rpt = report.split("");
 		int lastIdx = rpt.length - 1;
 
-		/*Print each character and sleep for 0.1s*/
-		for (String c : rpt) {
-			if (c.equals(rpt[lastIdx])) {
-				System.out.println(c);
+		for (int i = 0; i < rpt.length; i++) {
+			if (rpt[i] == rpt[lastIdx]) {
+				System.out.println(rpt[i]);
 			} else {
-				System.out.print(c);
+				System.out.print(rpt[i]);
 				try {
-					// Pause for half a second (100 milliseconds)
-					Thread.sleep(100); 
+					// Pause for 200 milliseconds
+					Thread.sleep(200); 
 				} catch (InterruptedException e) {
 					// Handle the interruption if needed
 					Thread.currentThread().interrupt();
@@ -143,14 +142,14 @@ public class Spin
 		int lastIdx = welcome.length - 1;
 
 		/*Display the welcome message with a delay using thread.sleep() */
-		for (String c : welcome) {
-			if (c == welcome[lastIdx]) {
-				System.out.println(c);
+		for (int i = 0; i < welcome.length; i++) {
+			if (welcome[i] == welcome[lastIdx]) {
+				System.out.println(welcome[i]);
 			} else {
-				System.out.print(c);
+				System.out.print(welcome[i]);
 				try {
-					// Pause for half a second (100 milliseconds)
-					Thread.sleep(100); 
+					// Pause for 200 milliseconds
+					Thread.sleep(200); 
 				} catch (InterruptedException e) {
 					// Handle the interruption if needed
 					Thread.currentThread().interrupt();
@@ -228,13 +227,13 @@ public class Spin
 		/*Create the directions list */
 		ArrayList<String> directions = new ArrayList<>();
 		Scanner sc = new Scanner(System.in);
-		boolean confimed = false;
+		boolean confirmed = false;
 
 		welcome(); //Run the welcome function
 		
 		/*If the user is happy with their array, then the solve function is called and results displayed
 		else the initialization process starts again */
-		while (!confimed) {
+		while (!confirmed) {
 			initializer(directions);		
 
 			System.out.println("Is this list ok with you? (y/n): "); 
@@ -250,3 +249,4 @@ public class Spin
 
 
 }
+
