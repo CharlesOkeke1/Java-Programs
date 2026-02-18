@@ -68,6 +68,19 @@ import java.util.*;
 
 public class Spin
 {
+	/* ===== Result Type ===== */
+    public static class SpinResult {
+        int rights;
+        int lefts;
+        int angle;
+
+        public SpinResult(int rights, int lefts, int angle) {
+            this.rights = rights;
+            this.lefts = lefts;
+            this.angle = angle;
+        }
+    }
+
 	//Main solving method
 	public static void solve(List<String> directions){
 		int angle = 0; //Turn angle
@@ -92,17 +105,9 @@ public class Spin
 			if (angle == -360) {
 				angle = 0;
 				lefts++;
-			} 
-
-			
+			} 			
 		}
-
-		/*Display the results banner with a special delayed display method and then display the results*/
-		String report = "===== THE SPIN GAME PRESENTS YOUR SPIN REPORT =====";
-		SteppedPrinting(report, 200);
-
-		System.out.println("The total number of turns was " + (rights + lefts) + " turns with " 
-		+ lefts + " left turns and " + rights + " right turns."); 
+		return new SpinResult(rights, lefts, angle);	 
 	}
 
 	/* Function to turn cardinal numbers into their ordinal counterparts */
@@ -137,7 +142,6 @@ public class Spin
 				}
 			}
 		}
-
 	}
 
 	/*Function to initialize the game and retrive necessary information from the user*/	
@@ -175,8 +179,7 @@ public class Spin
 					directions.add("left");
 				}
 				count++;
-			}
-			
+			}	
 		}
 
 		/*Compute the final list and displays it to the user */
@@ -200,10 +203,8 @@ public class Spin
 
 			if (c.equals("y")) System.out.println(sb);
 		}
-
 	}
 	
-
 	public static void main(String[] args) {
 		/*Create the directions list */
 		ArrayList<String> directions = new ArrayList<>();
@@ -211,10 +212,11 @@ public class Spin
 		boolean confirmed = false;
 
 		String wlcmMssg = "===== WELCOME TO THE SPIN GAME =====";
+		String report = "===== THE SPIN GAME PRESENTS YOUR SPIN REPORT =====";
 
 		SteppedPrinting(wlcmMssg, 200); //Run the welcome function
 		
-		/*If the user is happy with their array, then the solve function is called and results displayed
+		/*If the user is happy with their turns, then the solve function is called and results displayed
 		else the initialization process starts again */
 		while (!confirmed) {
 			initializer(directions);		
@@ -225,10 +227,14 @@ public class Spin
 			if (choiceN.equals("y")) confirmed = true;
 			else directions.clear(); 
 		}
-		
-		solve(directions);
+		SpinResult result = solve(directions);
+
+		/*Display the results banner with a special delayed display method and then display the results*/
+		SteppedPrinting(report, 200);
+
+		System.out.println("Total Turns:" + (result.rights + result.lefts));
+		System.out.println("Left Turns: " + result.lefts); 
+		System.out.println("Right Turns: " + result.rights); 		
 
 	}
-
-
 }
