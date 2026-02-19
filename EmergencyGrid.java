@@ -98,6 +98,7 @@ public class EmergencyGrid {
                 for (DistrictState d : districts.values()) {
                     totalCollapses += d.collapses;
                 } 
+                executedCommands = i;
                 if (totalCollapses >= 10) {
                     globalFailure = true;
                     break;
