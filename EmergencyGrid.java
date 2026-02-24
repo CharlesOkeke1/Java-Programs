@@ -99,7 +99,7 @@ public class EmergencyGrid {
                     totalCollapses += d.collapses;
                 } 
                 executedCommands = i;
-                if (totalCollapses >= 10) {
+                if (totalCollapses >= 100) {
                     globalFailure = true;
                     break;
                 }
